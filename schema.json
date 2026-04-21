@@ -1,0 +1,7 @@
+{
+  "models": {
+    "User": {"id": "int", "name": "str", "email": "str"},
+    "Item": {"id": "int", "name": "str", "price": "float"}
+  },
+  "routes": ["User", "Item"]
+}
