@@ -4,6 +4,16 @@
 
 ---
 
+### Demo
+
+<p align="center">
+  <a href="demo.mp4">
+    <img src="demo.png" width="800">
+  </a>
+</p>
+
+---
+
 ## Features
 
 * CLI-based backend generator
@@ -75,18 +85,10 @@ http://127.0.0.1:8000/docs
 
 ---
 
-## Demo
+## Why this exists
 
-<p align="center">
-  <img src="demo.gif" alt="Demo" width="800"/>
-</p>
-
----
-
-## Why this tool
-
-Setting up FastAPI projects repeatedly is time-consuming.
-This CLI removes boilerplate and lets you focus on building features.
+Setting up FastAPI projects repeatedly is repetitive and time-consuming.
+This CLI removes the boilerplate so you can focus on building actual features.
 
 ---
 
