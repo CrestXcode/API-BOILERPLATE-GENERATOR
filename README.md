@@ -37,7 +37,7 @@ Your API is live at `http://127.0.0.1:8000/docs`. Done.
 
 ## Demo
 
-> Full demo GIF coming soon.  
+[![Demo](https://asciinema.org/a/CEoY84prkbHqUadv.svg)](https://asciinema.org/a/CEoY84prkbHqUadv)
 
 ---
 
