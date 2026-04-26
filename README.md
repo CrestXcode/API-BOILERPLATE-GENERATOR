@@ -2,7 +2,7 @@
 
 # FastAPI Boilerplate Generator
 
-**Generate a complete FastAPI backend from a JSON schema — in seconds.**
+**Generate a complete, runnable FastAPI backend from a JSON schema — in one command.**
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
@@ -15,17 +15,13 @@
 > Stop writing the same FastAPI setup over and over.  
 > Define your models in JSON → get a fully working backend instantly.
 
-<br/>
-
-[![Demo](https://img.shields.io/badge/▶%20Watch%20Demo-Click%20Here-blueviolet?style=for-the-badge)](https://github.com/CrestXcode/API-BOILERPLATE-GENERATOR/blob/main/demo.mp4)
-
 </div>
 
 ---
 
 ## The Problem
 
-Every new FastAPI project starts the same way — setting up folders, writing SQLAlchemy models, wiring CRUD routes, configuring the database, writing `main.py`... It's tedious. It's repetitive. And it adds up.
+Every new FastAPI project starts the same way — setting up folders, writing SQLAlchemy models, wiring CRUD routes, configuring the database, writing `main.py`... It's tedious, repetitive, and eats time you could spend building actual features.
 
 ## The Solution
 
@@ -35,13 +31,45 @@ Every new FastAPI project starts the same way — setting up folders, writing SQ
 python -m generator.cli myapp --json schema.json --db --install --run
 ```
 
-That's it. Your API is live at `http://127.0.0.1:8000/docs`.
+Your API is live at `http://127.0.0.1:8000/docs`. Done.
 
 ---
 
-## What Gets Generated
+## Demo
 
-Given a simple schema like this:
+> Full demo GIF coming soon.  
+
+---
+
+## Features
+
+- **CLI-based** — one command scaffolds an entire project
+- **JSON → SQLAlchemy models** — no manual ORM writing
+- **Auto CRUD routes** — GET, POST, PUT, DELETE for every model, zero boilerplate
+- **Database auto-setup** — SQLite configured and initialized out of the box
+- **Dependency installation** — `--install` flag handles `pip install` automatically
+- **One-command server start** — `--run` gets you to live interactive docs immediately
+- **Clean project structure** — ready to extend, not a mess to untangle
+
+---
+
+## Quick Start
+
+### Prerequisites
+
+- Python 3.8+
+- pip
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/CrestXcode/API-BOILERPLATE-GENERATOR.git
+cd API-BOILERPLATE-GENERATOR
+```
+
+### 2. Define your schema
+
+Edit `schema.json` (one is already included so you can try it right away):
 
 ```json
 {
@@ -53,57 +81,35 @@ Given a simple schema like this:
 }
 ```
 
-The CLI automatically produces:
-
-| Output | Description |
-|--------|-------------|
-|  `app/models.py` | SQLAlchemy ORM models |
-|  `app/routes/` | Full CRUD routes for every model |
-|  `app/database.py` | Database config & session setup |
-|  `app/main.py` | Ready-to-run FastAPI app |
-|  `requirements.txt` | All dependencies listed |
-
----
-
-## Installation
-
-```bash
-git clone https://github.com/CrestXcode/API-BOILERPLATE-GENERATOR.git
-cd API-BOILERPLATE-GENERATOR
-```
-
-No extra setup — just Python 3.8+.
-
----
-
-## Usage
-
-### Basic
-
-```bash
-python -m generator.cli myapp --json schema.json
-```
-
-### Full Power Mode
+### 3. Generate your backend
 
 ```bash
 python -m generator.cli myapp --json schema.json --db --install --run
 ```
 
-| Flag | What it does |
-|------|--------------|
-| `--json` | Path to your schema JSON file |
-| `--db` | Initializes the SQLite database |
-| `--install` | Installs all required dependencies |
-| `--run` | Starts the FastAPI server immediately |
+### 4. Open your interactive API docs
+
+```
+http://127.0.0.1:8000/docs
+```
+
+That's it — full CRUD API with database, live in seconds.
 
 ---
 
-## Try It Right Now
+## CLI Reference
 
-1. Clone the repo
-2. Run the command above with the included `schema.json`
-3. Open `http://127.0.0.1:8000/docs` — your API is ready
+```
+python -m generator.cli <project_name> --json <schema_file> [options]
+```
+
+| Flag | Description |
+|------|-------------|
+| `<project_name>` | Name of the output folder to generate |
+| `--json` | Path to your JSON schema file |
+| `--db` | Initialize the SQLite database |
+| `--install` | Auto-install all required Python dependencies |
+| `--run` | Start the FastAPI development server after generation |
 
 ---
 
@@ -113,46 +119,72 @@ python -m generator.cli myapp --json schema.json --db --install --run
 myapp/
 ├── app/
 │   ├── main.py          # FastAPI app entry point
-│   ├── database.py      # DB engine & session
-│   ├── models.py        # SQLAlchemy models
+│   ├── database.py      # DB engine & session config
+│   ├── models.py        # SQLAlchemy ORM models
 │   └── routes/
-│       ├── user.py      # CRUD for User
-│       └── item.py      # CRUD for Item
+│       ├── user.py      # Full CRUD for User
+│       └── item.py      # Full CRUD for Item
 └── requirements.txt
 ```
 
 ---
 
+## What Gets Generated
+
+| File | What it contains |
+|------|-----------------|
+| `app/models.py` | SQLAlchemy ORM classes for each model in your schema |
+| `app/routes/*.py` | GET, POST, PUT, DELETE endpoints per model |
+| `app/database.py` | SQLite engine, Base declaration, and session factory |
+| `app/main.py` | FastAPI app with all routers registered and ready |
+| `requirements.txt` | All dependencies: fastapi, uvicorn, sqlalchemy, etc. |
+
+---
+
+## Running Manually
+
+If you skipped `--run`, start the server yourself:
+
+```bash
+cd myapp
+uvicorn app.main:app --reload
+```
+
+Then open: `http://127.0.0.1:8000/docs`
+
+---
+
 ## Roadmap
 
-- [x] JSON to SQLAlchemy model generation
+- [x] JSON → SQLAlchemy model generation
 - [x] Auto CRUD route generation
-- [x] One-command database setup
-- [x] Auto dependency installation
-- [ ] Pydantic schema generation
+- [x] Database auto-setup
+- [x] One-command dependency install & server start
+- [ ] Pydantic v2 schema generation (request/response models)
 - [ ] JWT authentication support
-- [ ] Docker / docker-compose output
 - [ ] PostgreSQL & MySQL support
-- [ ] PyPI package (`pip install fastapi-boilerplate-gen`)
+- [ ] Docker / docker-compose output
+- [ ] Interactive CLI mode (no JSON file needed)
+- [ ] PyPI package — `pip install fastapi-boilerplate-gen`
 
 ---
 
 ## Contributing
 
-Contributions are welcome! If you'd like to add a feature, fix a bug, or improve the docs:
+Contributions are very welcome! Here's how:
 
 1. Fork the repo
-2. Create a branch (`git checkout -b feature/your-idea`)
+2. Create a branch: `git checkout -b feature/your-idea`
 3. Commit your changes
 4. Open a Pull Request
 
-Ideas and feedback via [Issues](https://github.com/CrestXcode/API-BOILERPLATE-GENERATOR/issues) are also very welcome.
+Bug reports and ideas via [Issues](https://github.com/CrestXcode/API-BOILERPLATE-GENERATOR/issues) are just as appreciated.
 
 ---
 
 ## Show Your Support
 
-If this saved you time, a star goes a long way — it helps other developers find this tool.
+If this saved you time, a star helps other developers find it.
 
 [![Star this repo](https://img.shields.io/github/stars/CrestXcode/API-BOILERPLATE-GENERATOR?style=social)](https://github.com/CrestXcode/API-BOILERPLATE-GENERATOR/stargazers)
 
